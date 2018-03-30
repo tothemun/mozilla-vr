@@ -1,124 +1,96 @@
 {
-  "name": "react-ar-demo",
-  "version": "0.1.0",
-  "private": true,
+  "name": "webxr-webpack-boilerplate",
+  "version": "0.9.10",
+  "description": "Starter Kit for building rich, immersive WebXR projects (featuring A-Frame) PWA with Webpack and SASS",
+  "author": "Marko Kungla <marko.kungla@gmail.com> (https://github.com/mkungla)",
+  "main": "src/js/index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mkungla/webxr-webpack-boilerplate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mkungla/webxr-webpack-boilerplate/issues"
+  },
+  "homepage": "https://github.com/mkungla/webxr-webpack-boilerplate#readme",
+  "keywords": [
+    "webxr-boilerplate",
+    "webvr",
+    "webxr",
+    "boilerplate-application",
+    "starter-kit",
+    "aframe",
+    "aframevr",
+    "aframexr",
+    "aframe-vr",
+    "aframe-boilerplate",
+    "webpack",
+    "webpack-boilerplate",
+    "sass",
+    "pwa",
+    "service-workers"
+  ],
+  "scripts": {
+    "build": "cross-env WITH_VENDORS=true NODE_ENV=staging webpack --config ./devel/webpack.build.js",
+    "check": "npm-run-all check:*",
+    "check:yarn": "yarn check && yarn check --integrity && yarn outdated",
+    "clean": "npm-run-all clean:*",
+    "clean:yarn": " yarn autoclean --force --verbose --emoji",
+    "dist": "npm-run-all dist:*",
+    "dist:build": "cross-env WITH_VENDORS=true NODE_ENV=production webpack --config ./devel/webpack.build.js",
+    "dist:notice": "yarn licenses generate-disclaimer > NOTICE.md",
+    "info": "npm-run-all info:*",
+    "info:versions": "yarn versions",
+    "lint": "npm-run-all lint:*",
+    "lint:stylelint": "stylelint './src/app/sass/**/*.scss' --syntax scss --config ./config/stylelint.json",
+    "lint:standard": "standard -v | snazzy",
+    "start": "NODE_ENV=development webpack-dev-server --config ./devel/webpack.dev.js",
+    "test:ci-on-linux": "echo \"run tests\"",
+    "test:ci-on-mac": "echo \"run tests\"",
+    "test:ci-on-windows": "echo \"run tests\"",
+    "which:yarn": "which yarn && yarn bin"
+  },
   "dependencies": {
-    "classnames": "^2.2.5",
-    "lodash": "^4.17.4",
-    "memorystorage": "^0.11.0",
-    "moment": "^2.21.0",
-    "normalizr": "^3.2.2",
-    "prop-types": "^15.5.10",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-grid-system": "^2.4.1",
-    "react-redux": "^5.0.2",
-    "react-router": "^3.0.2",
-    "react-router-redux": "^4.0.8",
-    "redux": "^3.6.0",
-    "redux-thunk": "^2.2.0"
+    "aframe": "^0.8.0"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^3.2.16",
-    "@storybook/addon-centered": "^3.3.13",
-    "@storybook/addon-links": "^3.2.16",
-    "@storybook/react": "^3.2.16",
-    "autoprefixer": "7.1.6",
-    "babel": "^6.23.0",
-    "babel-core": "6.26.0",
-    "babel-eslint": "7.2.3",
-    "babel-jest": "20.0.3",
-    "babel-loader": "7.1.2",
-    "babel-preset-react-app": "^3.1.0",
-    "babel-runtime": "6.26.0",
-    "case-sensitive-paths-webpack-plugin": "2.1.1",
-    "chalk": "1.1.3",
-    "css-loader": "0.28.7",
-    "dotenv": "4.0.0",
-    "eslint": "4.10.0",
-    "eslint-config-react-app": "^2.0.1",
-    "eslint-loader": "1.9.0",
-    "eslint-plugin-flowtype": "2.39.1",
-    "eslint-plugin-import": "2.8.0",
-    "eslint-plugin-jsx-a11y": "5.1.1",
-    "eslint-plugin-react": "7.4.0",
-    "extract-text-webpack-plugin": "3.0.2",
-    "file-loader": "1.1.5",
-    "fs-extra": "3.0.1",
-    "html-webpack-plugin": "2.29.0",
-    "jest": "20.0.4",
-    "normalize.css": "^7.0.0",
-    "object-assign": "4.1.1",
-    "postcss-color-function": "^4.0.1",
-    "postcss-flexbugs-fixes": "3.2.0",
-    "postcss-import": "^11.0.0",
-    "postcss-initial": "^2.0.0",
-    "postcss-load-config": "^1.2.0",
-    "postcss-loader": "2.0.8",
-    "postcss-math": "0.0.8",
-    "postcss-mixins": "^6.2.0",
-    "postcss-nested": "^2.1.2",
-    "promise": "8.0.1",
-    "raf": "3.4.0",
-    "react-dev-utils": "^4.2.1",
-    "redux-devtools": "^3.4.1",
-    "style-loader": "0.19.0",
-    "svg-react-loader": "^0.3.7",
-    "sw-precache-webpack-plugin": "0.11.4",
-    "url-loader": "0.6.2",
-    "webpack": "3.8.1",
-    "webpack-dev-server": "2.9.4",
-    "webpack-glsl-loader": "^1.0.1",
-    "webpack-manifest-plugin": "1.3.2",
-    "whatwg-fetch": "2.0.3"
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "clean-webpack-plugin": "^0.1.17",
+    "copy-webpack-plugin": "^4.4.1",
+    "cross-env": "^5.1.3",
+    "css-loader": "^0.28.9",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "handlebars-webpack-plugin": "^1.3.2",
+    "node-sass": "^4.7.2",
+    "npm-run-all": "^4.1.2",
+    "postcss-loader": "^2.0.10",
+    "resolve-url-loader": "^2.2.1",
+    "sass-loader": "^6.0.6",
+    "snazzy": "^7.0.0",
+    "standard": "^10.0.3",
+    "style-loader": "^0.20.1",
+    "stylelint": "^8.4.0",
+    "stylelint-config-standard": "^18.0.0",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1",
+    "webpack-merge": "^4.1.1"
   },
-  "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,mjs}"
-    ],
-    "setupFiles": [
-      "<rootDir>/config/polyfills.js"
-    ],
-    "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
-      "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
-    ],
-    "testEnvironment": "node",
-    "testURL": "http://localhost",
-    "transform": {
-      "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
-    },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
-    ],
-    "moduleNameMapper": {
-      "^react-native$": "react-native-web"
-    },
-    "moduleFileExtensions": [
-      "web.js",
-      "mjs",
-      "js",
-      "json",
-      "web.jsx",
-      "jsx",
-      "node"
+  "devSettings": {
+    "host": "localhost",
+    "port": 9000,
+    "allowedHosts": [
+      ".github.com"
     ]
   },
-  "babel": {
-    "presets": [
-      "react-app"
+  "standard": {
+    "ignore": [
+      "/assets/*",
+      "/build/*",
+      "/dist/*",
+      "/docs/*",
+      "/tmp/*"
     ]
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   }
 }
